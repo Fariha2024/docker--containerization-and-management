@@ -113,8 +113,8 @@ Add the following instructions:
 ```dockerfile
 FROM rockylinux:9.3.20231119
 
-LABEL maintainer="ekamjeet@gmail.com"
-LABEL description="This is my test webserver"
+LABEL maintainer="Fariha Nizam <farihanizam50@gmail.com>"
+LABEL description="Custom Apache HTTP Server"
 
 RUN dnf update -y && \
     dnf install httpd iputils vim net-tools -y
@@ -428,11 +428,11 @@ hello world
 3. Open **My Hub**.
 4. Go to **Repositories**.
 5. Select **Create repository**.
-6. Enter the repository name used in the class: `tgdevops13june`.
+6. Enter the repository name used: `apache-webserver-rockylinux:web-v1.0`.
 7. Select **Public** if that is the intended visibility.
 8. Create the repository.
 
-The class used the Docker Hub namespace `paragdongre1997`. Use your own Docker Hub namespace if it differs.
+The class used the Docker Hub namespace `fariha2026`. Use your own Docker Hub namespace if it differs.
 
 ### 🔹 STEP 33: Test the Web Server from the Host
 
@@ -512,7 +512,7 @@ Enter your Docker Hub username and a Docker Hub access token when prompted.
 ### 🔹 STEP 36: Tag the Custom Image
 
 ```bash
-docker tag mycustomweb:v0.1 YOUR_DOCKERHUB_USERNAME/tgdevops13june:web-v1.0
+docker tag mycustomweb:v0.1 YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0
 ```
 
 The class used this image reference:
@@ -525,7 +525,7 @@ Explanation:
 
 - `docker tag` creates another image reference for the same image.
 - `YOUR_DOCKERHUB_USERNAME` is your Docker Hub namespace.
-- `tgdevops13june` is the repository name.
+- `apache-webserver-rockylinux` is the repository name.
 - `web-v1.0` is the tag.
 
 ### 🔹 STEP 37: Verify the Image Tags
@@ -539,7 +539,7 @@ You should see both the local image reference and the Docker Hub repository refe
 ### 🔹 STEP 38: Push the Image to Docker Hub
 
 ```bash
-docker image push YOUR_DOCKERHUB_USERNAME/tgdevops13june:web-v1.0
+docker image push YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0
 ```
 
 This uploads the tagged image to Docker Hub.
@@ -562,7 +562,7 @@ CMD ["-D", "FOREGROUND"]
 Then built:
 
 ```bash
-docker build -t YOUR_DOCKERHUB_USERNAME/tgdevops13june:web-v1.1 --no-cache .
+docker build -t YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0 --no-cache .
 ```
 
 **Important Dockerfile rule:** When multiple `CMD` instructions appear in one Dockerfile, only the last `CMD` takes effect. In this example, the effective command becomes `-D FOREGROUND`, which is not a standalone executable. The container is therefore expected to fail to start.
@@ -571,7 +571,7 @@ Check the image and container output:
 
 ```bash
 docker images
-docker run --name c2 -dit -P YOUR_DOCKERHUB_USERNAME/tgdevops13june:web-v1.1
+docker run --name c2 -dit -P YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0
 docker ps -a
 docker logs c2
 ```
@@ -591,8 +591,8 @@ Use:
 ```dockerfile
 FROM rockylinux:9.3.20231119
 
-LABEL maintainer="ekamjeet@gmail.com"
-LABEL description="This is my test webserver"
+LABEL maintainer="Fariha Nizam <farihanizam50@gmail.com"
+LABEL description="Custom Apache HTTP Server"
 
 RUN dnf update -y && \
     dnf install httpd iputils vim net-tools -y
@@ -615,14 +615,14 @@ CMD ["-D", "FOREGROUND"]
 Build the image:
 
 ```bash
-docker build -t YOUR_DOCKERHUB_USERNAME/tgdevops13june:web-v1.2 --no-cache .
+docker build -t YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0 --no-cache .
 ```
 
 ### 🔹 STEP 41: Remove the Failed Container and Run C3
 
 ```bash
 docker rm -f c2
-docker run --name c3 -dit -P YOUR_DOCKERHUB_USERNAME/tgdevops13june:web-v1.2
+docker run --name c3 -dit -P YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0
 docker ps -a
 ```
 
@@ -742,7 +742,7 @@ The class demonstrated that:
 ### 🔹 STEP 47: Push the Updated Image
 
 ```bash
-docker image push YOUR_DOCKERHUB_USERNAME/tgdevops13june:web-v1.2
+docker image push YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0
 ```
 
 ### 🔹 STEP 48: Remove Containers, Images and Selected Volumes
@@ -770,7 +770,7 @@ docker volume ls
 ### 🔹 STEP 50: Pull the Image from Docker Hub
 
 ```bash
-docker pull YOUR_DOCKERHUB_USERNAME/tgdevops13june:web-v1.2
+docker pull YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0
 docker images
 ```
 
@@ -779,7 +779,7 @@ This demonstrates retrieving the published image from Docker Hub after local cle
 ### 🔹 STEP 51: Create Container C11
 
 ```bash
-docker run --name c11 -dit -P YOUR_DOCKERHUB_USERNAME/tgdevops13june:web-v1.2
+docker run --name c11 -dit -P YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0
 docker ps -a
 ```
 
@@ -836,7 +836,7 @@ The response should now include the original `hello world` content and the newly
 ### 🔹 STEP 53: Create Container C12
 
 ```bash
-docker run --name c12 -dit -P YOUR_DOCKERHUB_USERNAME/tgdevops13june:web-v1.2
+docker run --name c12 -dit -P YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0
 docker ps -a
 ```
 
@@ -869,7 +869,7 @@ To make C13 use the same web content as C11, mount C11's existing volume at `/va
 docker run --name c13 \
   -v C11_VOLUME_NAME:/var/www/html \
   -dit -P \
-  YOUR_DOCKERHUB_USERNAME/tgdevops13june:web-v1.2
+  YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0
 ```
 
 The class used the actual volume ID/name and image ID. Replace the placeholders with the values from your own host.
@@ -1102,13 +1102,13 @@ Save and exit:
 ### 🔹 STEP 70: Build the Final Custom Image
 
 ```bash
-docker build -t YOUR_DOCKERHUB_USERNAME/tgdevops13june:webfinal-v1.3 --no-cache .
+docker build -t YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0 --no-cache .
 ```
 
 ### 🔹 STEP 71: Push the Final Image to Docker Hub
 
 ```bash
-docker image push YOUR_DOCKERHUB_USERNAME/tgdevops13june:webfinal-v1.3
+docker image push YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0
 ```
 
 ### 🔹 STEP 72: Verify the Image Tags
@@ -1130,7 +1130,7 @@ Your local image list may differ depending on which cleanup commands you have ru
 ### 🔹 STEP 73: Run the Final Container
 
 ```bash
-docker run --name c31 -dit -P YOUR_DOCKERHUB_USERNAME/tgdevops13june:webfinal-v1.3
+docker run --name c31 -dit -P YOUR_DOCKERHUB_USERNAME/apache-webserver-rockylinux:web-v1.0
 docker ps -a
 ```
 
