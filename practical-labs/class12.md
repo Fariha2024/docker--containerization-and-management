@@ -53,6 +53,10 @@ uname -r
 
 ```bash
 vim /etc/yum.conf
+
+
+		[main]
+        exclude = 6.1,6.2,6.3
 ```
 
 ---

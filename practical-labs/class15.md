@@ -456,7 +456,11 @@ Save the file:
 ### 🔹 STEP 38: Build Image Using ARG
 
 ```bash
-docker build -t myargtest:v1 --no-cache .
+docker build -t docker-class15-build-arguments:v1.0 --no-cache .
+
+docker images
+docker image inspect docker-class15-build-arguments:v1.0
+
 ```
 
 During the build, Docker executes the RUN instruction and displays the application version.
@@ -498,7 +502,10 @@ The value of x is 10
 ### 🔹 STEP 41: Override ARG Value During Build
 
 ```bash
-docker build --build-arg x=140 -t myargtest:v1.2 --no-cache .
+docker build --build-arg x=140 -t docker-class15-build-arg:v1.2 --no-cache .
+
+docker images
+docker image inspect docker-class15-build-arg:v1.2
 ```
 
 Expected build output includes:
@@ -536,7 +543,7 @@ Save the file:
 ### 🔹 STEP 43: Build Image with Default ARG Values
 
 ```bash
-docker build -t myargtest:v1.2 --no-cache .
+docker build -t docker-class15-build-arguments:v1.2 --no-cache .
 ```
 
 ### 🔹 STEP 44: Override Multiple ARG Values
@@ -546,7 +553,7 @@ docker build \
 --build-arg x=180 \
 --build-arg uname=Harman \
 --build-arg gitrepo=https://example.com/project \
--t myargtest:v1.2 --no-cache .
+-t docker-class15-build-arguments:v1.2 --no-cache .
 ```
 
 The build output displays the supplied values.
@@ -554,7 +561,7 @@ The build output displays the supplied values.
 ### 🔹 STEP 45: Run Container and Check ARG Variables
 
 ```bash
-docker run --name c61 -it myargtest:v1.2 bash
+docker run --name c61 -it docker-class15-build-arguments:v1.2 bash
 ```
 
 Inside the container:
@@ -593,7 +600,7 @@ ARG uname=Ekam
 Build command:
 
 ```bash
-docker build --build-arg x=180 -t myargtest:v1.2 .
+docker build --build-arg x=180 -t docker-class15-build-arguments:v1.2 .
 ```
 
 ---
@@ -649,7 +656,7 @@ Save the file:
 ### 🔹 STEP 49: Build Image with ENV Variables
 
 ```bash
-docker build -t myenvtest:v1.1 --no-cache .
+docker build -t docker-class15-environment-variables:v1.0  --no-cache .
 ```
 
 ### 🔹 STEP 50: Check Docker Images
@@ -661,7 +668,7 @@ docker images
 ### 🔹 STEP 51: Create Container C31
 
 ```bash
-docker run --name c31 -dit myenvtest:v1.1
+docker run --name c31 -dit docker-class15-environment-variables:v1.0
 ```
 
 ### 🔹 STEP 52: Check Container Status
@@ -759,7 +766,7 @@ Save the file:
 ### 🔹 STEP 58: Build Updated ENV Image
 
 ```bash
-docker build -t myenvtest:v1.2 --no-cache .
+docker build -t docker-class15-environment-variables:v1.1 --no-cache .
 ```
 
 The ENV variable `z` receives the build-time value of ARG variable `x`.
@@ -864,7 +871,7 @@ ARG x=10
 Override during build:
 
 ```bash
-docker build --build-arg x=140 -t myimage:v1 .
+docker build --build-arg x=140 -t docker-class15-environment-variables:v1.0
 ```
 
 **ENV example:**
@@ -876,7 +883,7 @@ ENV y=20
 Override during container creation:
 
 ```bash
-docker run --name c100 -e y=900 myenvtest:v1.2
+docker run --name c100 -e y=900 docker-class15-environment-variables:v1.0
 ```
 
 **Passing ARG into ENV:**
@@ -1001,7 +1008,7 @@ cat entrypoint.sh
 ### 🔹 STEP 75: Build Docker Image
 
 ```bash
-docker build -t mytest:v1.0 --no-cache .
+docker build -t docker-class15-entrypoint-shell:v1.0 --no-cache .
 ```
 
 ### 🔹 STEP 76: Check Docker Images
@@ -1013,7 +1020,7 @@ docker images
 ### 🔹 STEP 77: Create Container C11
 
 ```bash
-docker run --name c11 -dit mytest:v1.0
+docker run --name c11 -dit docker-class15-entrypoint-shell:v1.0
 ```
 
 ### 🔹 STEP 78: Check Container Status
@@ -1055,7 +1062,7 @@ This copies `entrypoint.sh` from the build context into the container image.
 The Docker build command:
 
 ```bash
-docker build -t mytest:v1.1 --no-cache .
+docker build -t docker-class15-entrypoint-shell:v1.1 --no-cache .
 ```
 
 The dot (`.`) represents the current directory as the build context.
@@ -1101,13 +1108,13 @@ Save the file:
 ### 🔹 STEP 83: Build Updated Image
 
 ```bash
-docker build -t mytest:v1.2 --no-cache .
+docker build -t docker-class15-entrypoint-shell:v1.2 --no-cache .
 ```
 
 ### 🔹 STEP 84: Create Container with a Runtime Command
 
 ```bash
-docker run --name c51 -it mytest:v1.2 date
+docker run --name c51 -it docker-class15-entrypoint-shell:v1.2 date
 ```
 
 The entrypoint script runs first and then executes the `date` command through:
@@ -1127,7 +1134,7 @@ The logs show the environment variable values, directory creation and command ex
 ### 🔹 STEP 86: Pass a Custom Command to ENTRYPOINT Script
 
 ```bash
-docker run --name c52 -it mytest:v1.2 sh -c 'echo "Custom command executed"'
+docker run --name c52 -it docker-class15-entrypoint-shell:v1.2 sh -c 'echo "Custom command executed"'
 ```
 
 The shell script receives the supplied command-line arguments and executes them.
@@ -1281,7 +1288,7 @@ mydb.sql
 ### 🔹 STEP 96: Build MySQL Docker Image
 
 ```bash
-docker build -t mydb:v1.0 --no-cache .
+docker build -t docker-class15-mysql-database:v1.0  --no-cache .
 ```
 
 ### 🔹 STEP 97: Check Docker Images
@@ -1299,7 +1306,7 @@ mydb:v1.0
 ### 🔹 STEP 98: Create MySQL Container C52
 
 ```bash
-docker run --name c52 -dit -P mydb:v1.0
+docker run --name c52 -dit -P docker-class15-mysql-database:v1.0
 ```
 
 ### 🔹 STEP 99: Check Container Status
@@ -1414,7 +1421,7 @@ EXPOSE 3306 33060
 The practical uses:
 
 ```bash
-docker run --name c52 -dit -P mydb:v1.0
+docker run --name c52 -dit -P docker-class15-mysql-database:v1.0
 ```
 
 The `-P` option publishes exposed ports to dynamically assigned host ports.
@@ -1490,7 +1497,7 @@ CMD ["mysqld"]
 ### 🔹 STEP 114: Build Updated MySQL Image
 
 ```bash
-docker build -t mynewdb:v1.1 --no-cache .
+docker build -t docker-class15-mysql-database:v1.1  --no-cache .
 ```
 
 ### 🔹 STEP 115: Check Docker Images
@@ -1508,7 +1515,7 @@ mynewdb:v1.1
 ### 🔹 STEP 116: Create Container C101
 
 ```bash
-docker run --name c101 -dit -P mynewdb:v1.1
+docker run --name c101 -dit -P docker-class15-mysql-database:v1.1
 ```
 
 ### 🔹 STEP 117: Check Container Status
