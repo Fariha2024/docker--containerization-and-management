@@ -1265,3 +1265,50 @@ After completing this practical lab, the learner will have hands-on experience w
 - [ ] Replace sample volume names, image IDs, and host ports with values from your own lab.
 - [ ] Do not add passwords, access tokens, or other credentials to this Markdown file.
 - [ ] Keep the failed `CMD` and `ENTRYPOINT` experiments labelled as learning experiments, not recommended production configurations.
+
+--------------------------------===========================------------------------
+
+
+# ==========================================================
+# Project: Apache Web Server on Rocky Linux
+# Maintainer: Fariha Nizam
+# Docker Hub: fariha2026
+# Repository: apache-webserver-rockylinux
+# Version: web-v1.0
+# ==========================================================
+
+# Base Image
+FROM rockylinux:latest
+
+# Image Metadata
+LABEL maintainer="Fariha Nizam"
+LABEL description="Custom Apache HTTP Server image built on Rocky Linux"
+LABEL version="web-v1.0"
+
+# Update packages and install Apache utilities
+RUN dnf update -y && \
+    dnf install -y httpd iputils vim net-tools && \
+    dnf clean all
+
+# Copy website content
+COPY ./index.html /var/www/html/index.html
+
+# Copy Dockerfile into the image
+COPY ./Dockerfile /mnt/Dockerfile
+
+# Set permissions and ownership
+RUN chmod -R 755 /var/www/html && \
+    chown -R apache:apache /var/www/html
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Expose Apache port
+EXPOSE 80
+
+# Declare website volume
+VOLUME ["/var/www/html"]
+
+# Start Apache in foreground mode
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+
